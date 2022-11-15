@@ -11,7 +11,7 @@ class AppBarContainerWidget extends StatelessWidget {
       {Key? key,
       required this.child,
       this.title,
-      this.implementLeading = false,
+      this.implementLeading = true,
       this.titleString,
       this.implementTraleing = false})
       : super(key: key);

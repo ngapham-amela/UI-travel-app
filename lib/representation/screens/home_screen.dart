@@ -1,7 +1,4 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:travel_app_flutter/core/constants/color_constants.dart';
 import 'package:travel_app_flutter/core/constants/dismension_constants.dart';
 import 'package:travel_app_flutter/core/helpers/asset_helper.dart';
 import 'package:travel_app_flutter/core/helpers/image_helper.dart';
