@@ -1,25 +1,33 @@
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travel_app_flutter/core/constants/color_constants.dart';
 import 'package:travel_app_flutter/core/constants/dismension_constants.dart';
+import 'package:travel_app_flutter/core/constants/textstyle_ext.dart';
 import 'package:travel_app_flutter/core/helpers/asset_helper.dart';
 import 'package:travel_app_flutter/core/helpers/image_helper.dart';
 
 class AppBarContainerWidget extends StatelessWidget {
-  const AppBarContainerWidget(
-      {Key? key,
-      required this.child,
-      this.title,
-      this.implementLeading = true,
-      this.titleString,
-      this.implementTraleing = false})
-      : super(key: key);
+  const AppBarContainerWidget({
+    Key? key,
+    required this.child,
+    this.title,
+    this.titleString,
+    this.subTitleString,
+    this.implementTraling = false,
+    this.implementLeading = true,
+    this.paddingContent =
+        const EdgeInsets.symmetric(horizontal: kMediumPadding),
+  })  : assert(title != null || titleString != null,
+            'title or titleString can\'t be null'),
+        super(key: key);
+
   final Widget child;
   final Widget? title;
   final String? titleString;
+  final String? subTitleString;
+  final bool implementTraling;
   final bool implementLeading;
-  final bool implementTraleing;
+  final EdgeInsets? paddingContent;
 
   @override
   Widget build(BuildContext context) {
@@ -29,91 +37,114 @@ class AppBarContainerWidget extends StatelessWidget {
           SizedBox(
             height: 186,
             child: AppBar(
-              centerTitle: true,
-              automaticallyImplyLeading: false,
-              elevation: 0,
-              toolbarHeight: 90,
-              backgroundColor: ColorPalette.backgroundScaffoldGold,
               title: title ??
-                  Row(
-                    children: [
-                      if (implementLeading)
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(
-                                kDefaultPadding,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        if (implementLeading)
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  kDefaultPadding,
+                                ),
+                                color: Colors.white,
+                              ),
+                              padding: EdgeInsets.all(kItemPadding),
+                              child: Icon(
+                                FontAwesomeIcons.arrowLeft,
+                                size: kDefaultPadding,
+                                color: Colors.black,
                               ),
                             ),
-                            color: Colors.white,
                           ),
-                          padding: EdgeInsets.all(kItemPadding),
-                          child: Icon(
-                            FontAwesomeIcons.arrowLeft,
-                            color: Colors.black,
-                            size: kDefaultIconSize,
-                          ),
-                        ),
-                      Expanded(
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Text(
-                                titleString ?? '',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
+                        Expanded(
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  titleString ?? '',
+                                  style: TextStyles.defaultStyle.fontHeader
+                                      .whiteTextColor.bold,
                                 ),
-                              )
-                            ],
+                                if (subTitleString != null)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: kMediumPadding),
+                                    child: Text(
+                                      subTitleString!,
+                                      style: TextStyles.defaultStyle.fontCaption
+                                          .whiteTextColor,
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      if (implementTraleing)
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(kDefaultPadding),
-                            color: Colors.white,
+                        if (implementTraling)
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                kDefaultPadding,
+                              ),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.all(kItemPadding),
+                            child: Icon(
+                              FontAwesomeIcons.bars,
+                              size: kDefaultPadding,
+                              color: Colors.black,
+                            ),
                           ),
-                          padding: EdgeInsets.all(kItemPadding),
-                          child: Icon(
-                            FontAwesomeIcons.bars,
-                            size: kDefaultPadding,
-                            color: Colors.black,
-                          ),
-                        )
-                    ],
+                      ],
+                    ),
                   ),
               flexibleSpace: Stack(
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      gradient: Gradients.defaultGradientBackground,
+                      gradient: const LinearGradient(
+                        colors: [Color(0xff8F67E8), Color(0xff6357CC)],
+                      ),
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(35),
                       ),
                     ),
                   ),
                   Positioned(
-                    child: ImageHelper.loadFromAsset(AssetHelper.oval1),
                     top: 0,
                     left: 0,
+                    child: ImageHelper.loadFromAsset(
+                      AssetHelper.oval1,
+                    ),
                   ),
                   Positioned(
-                    child: ImageHelper.loadFromAsset(AssetHelper.oval2),
                     bottom: 0,
                     right: 0,
-                  )
+                    child: ImageHelper.loadFromAsset(
+                      AssetHelper.oval2,
+                    ),
+                  ),
                 ],
               ),
+              centerTitle: true,
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              toolbarHeight: 90,
+              backgroundColor: ColorPalette.backgroundScaffoldGold,
             ),
           ),
           Container(
             margin: EdgeInsets.only(top: 156),
-            padding: EdgeInsets.symmetric(horizontal: kMediumPadding),
+            padding: paddingContent,
             child: child,
-          )
+          ),
         ],
       ),
     );
