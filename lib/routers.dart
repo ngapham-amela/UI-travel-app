@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app_flutter/data/models/hotel_model.dart';
+import 'package:travel_app_flutter/data/models/room_model.dart';
+import 'package:travel_app_flutter/representation/screens/checkout_screen.dart';
 import 'package:travel_app_flutter/representation/screens/guest_and_book_screen.dart';
 import 'package:travel_app_flutter/representation/screens/hotel_detail_screen.dart';
 import 'package:travel_app_flutter/representation/screens/hotel_screen.dart';
@@ -19,7 +21,6 @@ final Map<String, WidgetBuilder> router = {
   GuestAndRoomBookingScreen.routeName: ((context) =>
       GuestAndRoomBookingScreen()),
   ListHotelScreen.routeName: ((context) => ListHotelScreen()),
-  // HotelDetailScreen.routeName: (context) => HotelDetailScreen(),
   SelectRoomHotelScreen.routeName: (context) => SelectRoomHotelScreen(),
 };
 
@@ -31,6 +32,15 @@ MaterialPageRoute<dynamic>? generateRoutes(RouteSettings settings) {
           final HotelModel hotelModel = (settings.arguments as HotelModel);
           return HotelDetailScreen(
             hotelModel: hotelModel,
+          );
+        },
+      );
+    case CheckoutScreen.routeName:
+      return MaterialPageRoute(
+        builder: (context) {
+          final RoomModel roomModel = (settings.arguments as RoomModel);
+          return CheckoutScreen(
+            roomModel: roomModel,
           );
         },
       );
