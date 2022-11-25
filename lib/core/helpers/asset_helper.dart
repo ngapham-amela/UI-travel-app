@@ -29,5 +29,12 @@ class AssetHelper {
   static const String iconExchange = 'assets/icons/icon_exchange.png';
   static const String iconFontDesk = 'assets/icons/icon_font_desk.png';
   static const String iconMore = 'assets/icons/icon_more.png';
+  static const String iconWifiFree = 'assets/icons/icon_wifi_free.png';
+  static const String iconRefund = 'assets/icons/icon_refund.png';
+  static const String iconBreafast = 'assets/icons/icon_breafast.png';
+  static const String iconSmoking = 'assets/icons/icon_smoking.png';
   static const String map = 'assets/images/map.png';
+  static const String room1 = 'assets/images/room1.png';
+  static const String room2 = 'assets/images/room2.png';
+  static const String room3 = 'assets/images/room3.png';
 }
