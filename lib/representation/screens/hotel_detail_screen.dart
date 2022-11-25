@@ -5,6 +5,7 @@ import 'package:travel_app_flutter/core/constants/textstyle_ext.dart';
 import 'package:travel_app_flutter/core/helpers/asset_helper.dart';
 import 'package:travel_app_flutter/core/helpers/image_helper.dart';
 import 'package:travel_app_flutter/data/models/hotel_model.dart';
+import 'package:travel_app_flutter/representation/screens/select_room_hotel_screen.dart';
 import 'package:travel_app_flutter/representation/widgets/dashline_widget.dart';
 import 'package:travel_app_flutter/representation/widgets/item_button_widget.dart';
 
@@ -215,7 +216,9 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                     SizedBox(
                                       height: kMinPadding,
                                     ),
-                                    Text('Exchange'),
+                                    Text(
+                                      'Currency\nExchange',
+                                    ),
                                   ],
                                 ),
                                 Column(
@@ -230,8 +233,7 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                                       height: kMinPadding,
                                     ),
                                     Text(
-                                      'Front Desk',
-                                      overflow: TextOverflow.ellipsis,
+                                      '24-hour\nFront Desk',
                                     ),
                                   ],
                                 ),
@@ -273,7 +275,10 @@ class _HotelDetailScreenState extends State<HotelDetailScreen> {
                             ),
                             ItemButtonWidget(
                               data: 'Select Room',
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed(SelectRoomHotelScreen.routeName);
+                              },
                             ),
                           ],
                         ),
