@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app_flutter/core/constants/dismension_constants.dart';
 import 'package:travel_app_flutter/core/helpers/asset_helper.dart';
 import 'package:travel_app_flutter/data/models/room_model.dart';
+import 'package:travel_app_flutter/representation/screens/checkout_screen.dart';
 import 'package:travel_app_flutter/representation/widgets/app_bar_container.dart';
 import 'package:travel_app_flutter/representation/widgets/item_room_book_widget.dart';
 
@@ -49,10 +51,18 @@ class _SelectRoomHotelScreenState extends State<SelectRoomHotelScreen> {
       child: SingleChildScrollView(
         child: Column(
           children: roomModel
-              .map((e) => ItemRoomBookWidget(
+              .map(
+                (e) => Padding(
+                  padding: EdgeInsets.only(bottom: kMediumPadding),
+                  child: ItemRoomBookWidget(
                     roomModel: e,
-                    onTap: () {},
-                  ))
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(CheckoutScreen.routeName, arguments: e);
+                    },
+                  ),
+                ),
+              )
               .toList(),
         ),
       ),
